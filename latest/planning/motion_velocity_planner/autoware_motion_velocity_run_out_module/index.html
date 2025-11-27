@@ -12061,6 +12061,8 @@
       
         
       
+        
+      
     
     
     
@@ -14658,6 +14660,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../autoware_diffusion_planner" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diffusion Planner
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../autoware_static_centerline_generator" class="md-nav__link">
         
   
@@ -14716,10 +14746,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_9" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_10" >
         
           
-          <label class="md-nav__link" for="__nav_8_9" id="__nav_8_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8_10" id="__nav_8_10_label" tabindex="">
             
   
   
@@ -14737,8 +14767,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8_9">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_10">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -14933,10 +14963,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_10" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_11" >
         
           
-          <label class="md-nav__link" for="__nav_8_10" id="__nav_8_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8_11" id="__nav_8_11_label" tabindex="">
             
   
   
@@ -14954,8 +14984,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8_10">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_11">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -15021,10 +15051,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_10_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_11_2" >
         
           
-          <label class="md-nav__link" for="__nav_8_10_2" id="__nav_8_10_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8_11_2" id="__nav_8_11_2_label" tabindex="0">
             
   
   
@@ -15042,8 +15072,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_10_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8_10_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_11_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_11_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -15203,10 +15233,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_10_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_11_5" >
         
           
-          <label class="md-nav__link" for="__nav_8_10_5" id="__nav_8_10_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8_11_5" id="__nav_8_11_5_label" tabindex="0">
             
   
   
@@ -15224,8 +15254,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_10_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8_10_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_11_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_11_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -23072,7 +23102,10 @@ and first check if it satisfies the following conditions to stop:</p>
 <h3 id="6-calculate-the-stop-or-slowdowns">6. Calculate the stop or slowdowns<a class="headerlink" href="#6-calculate-the-stop-or-slowdowns" title="Permanent link">#</a></h3>
 <p>Finally, for each object, we calculate how the velocity profile will be modified based on the decision made:</p>
 <ul>
-<li><code>stop</code>: insert a <code>0</code> velocity ahead of the predicted collision point by the distance set in the <code>stop.distance_buffer</code> parameter.</li>
+<li><code>stop</code>: insert a <code>0</code> velocity ahead of the predicted collision point by the distance set in the <code>stop.distance_buffer</code> parameter.<ul>
+<li>to prevent the stop pose from jumping, the previous stop pose is reused if its arc length position is before the newly calculated stop pose and the arc length difference between them is smaller than the <code>stop.reuse_margin</code> parameter.</li>
+</ul>
+</li>
 <li><code>slowdown</code>: insert a <span class="arithmatex">\(V_{slow}\)</span> velocity between the collision point and the point ahead of collision point by the distance set in the <code>slowdown.distance_buffer</code> parameter.<ul>
 <li><span class="arithmatex">\(V_{slow}\)</span> is calculated as the maximum between the safe velocity and the comfortable velocity.<ul>
 <li>safe velocity: velocity required to be able to stop over the <code>distance_buffer</code> assuming a deceleration as set by the
